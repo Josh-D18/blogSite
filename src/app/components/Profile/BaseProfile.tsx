@@ -2,7 +2,7 @@ import React from "react";
 import ProfileImage from "./ui/ProfileImage";
 import ProfileContent from "./ui/ProfileContent";
 
-const BaseProfile = () => {
+const BaseProfile: React.FC = () => {
   return (
     <div className="bg-white">
       <ProfileImage />

@@ -1,15 +1,15 @@
 import React from "react";
 import Image from "next/image";
 import placeholderImage from "../../../assets/images/jk-placeholder-image.jpg";
-const ProfileImage = () => {
+const ProfileImage: React.FC = () => {
   return (
     <div className="flex items-center justify-center">
       <div className="bg-white h-[100px] rounded-t-[100px] absolute  w-32 flex items-center justify-center">
-        <div className="flex items-center justify-center relative top-2">
+        <div className="relative flex items-center justify-center top-2">
           <Image
             src={placeholderImage}
             alt="Profile Image"
-            className="border-4 border-gray-500 rounded-full w-24 h-24 object-cover aspect-auto"
+            className="object-cover w-24 h-24 border-4 border-gray-500 rounded-full aspect-auto"
             priority={true}
             placeholder="blur"
           />
