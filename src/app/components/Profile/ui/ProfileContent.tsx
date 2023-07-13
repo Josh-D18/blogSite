@@ -1,8 +1,9 @@
 import React from "react";
+import Link from "next/link";
 
 const ProfileContent = () => {
   return (
-    <div className="h-full">
+    <div className="h-full mt-[84px]">
       <div>
         <h2 className="font-semibold text-center mt-7 text-lg">Josh Date</h2>
         <p className="text-center pt-4 md:px-5 lg:px-10">

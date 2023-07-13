@@ -4,7 +4,7 @@ import placeholderImage from "../../../assets/images/jk-placeholder-image.jpg";
 const ProfileImage = () => {
   return (
     <div className="flex items-center justify-center">
-      <div className="bg-white h-[100px] rounded-t-[100px] relative bottom-20 w-32 flex items-center justify-center">
+      <div className="bg-white h-[100px] rounded-t-[100px] absolute  w-32 flex items-center justify-center">
         <div className="flex items-center justify-center relative top-2">
           <Image
             src={placeholderImage}
