@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 type Blog = {
   title: string;
   content: string;
+  _id: string;
 };
 
 type ProfileContentProps = {
@@ -21,7 +22,7 @@ const BaseProfile: React.FC<ProfileContentProps> = (props) => {
 
   return (
     <div className="bg-white">
-      <div className="h-full mt-[30px]">
+      <div className="mt-[30px] h-[76px]">
         <div>
           <p className="pt-4 mx-10 leading-8 text-left md:max-w-lg md:m-auto lg:px-10 xl:max-w-xl lg:max-w-2xl">
             {bio}
@@ -35,22 +36,16 @@ const BaseProfile: React.FC<ProfileContentProps> = (props) => {
             </button>
           </div>
           <>
-            {blogs ? (
+            {blogs.length < 1 || blogs ? (
               blogs.map((blog, id) => (
                 <div
                   key={id}
-                  className="flex items-center justify-center mx-3 mt-5"
-                  onClick={() => linkToPage(`/blog/${id}`)}
+                  className="flex items-center justify-center mx-3 mt-5 last:mb-3"
+                  onClick={() => linkToPage(`/blog/${blogs[id]._id}`)}
                 >
-                  <div className="border-4 border-[#C0C0C0] shadow-lg p-3 my-8 rounded-lg w-full max-w-lg ">
-                    <h3 className="font-semibold">Title to Blog</h3>
-                    <p className="block font-normal truncate">
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Repellendus nulla tempora corporis perferendis quia
-                      laborum iure, expedita suscipit id aspernatur beatae alias
-                      natus est at. Eveniet, soluta accusantium? Minima,
-                      incidunt.
-                    </p>
+                  <div className="border-4 border-[#C0C0C0] shadow-lg p-3 mt-4 rounded-lg w-full max-w-lg ">
+                    <h3 className="font-semibold">{blog.title}</h3>
+                    <p className="block font-normal truncate">{blog.content}</p>
                   </div>
                 </div>
               ))

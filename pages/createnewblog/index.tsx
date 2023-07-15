@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import React, { useState } from "react";
 import "../../src/app/globals.css";
 import { useRouter } from "next/navigation";
+import environmentURL from "../../src/app/utils/url";
 
 const CreateANewBlog: React.FC = () => {
   const [title, setTitle] = useState("");
@@ -27,7 +28,7 @@ const CreateANewBlog: React.FC = () => {
       const userId = sessionStorage.getItem("userId");
 
       await axios.post(
-        "http://localhost:5050/blog",
+        `${environmentURL}/api/blog`,
         {
           title,
           content,

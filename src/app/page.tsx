@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 type Blog = {
   title: string;
   content: string;
+  _id: string;
 };
 interface Data {
   backgroundColor: string;
@@ -32,20 +33,32 @@ const Home = () => {
     const getData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5050/user/${userID}`,
+          `${environmentURL}/api/user/${userID}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
         );
+
+        const blogIds = response.data.blogs;
+        const blogRequests = blogIds.map((blogId: string) =>
+          axios.get(`${environmentURL}/api/blog/${blogId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+        );
+
+        const blogResponses = await Promise.all(blogRequests);
+        const blogs = blogResponses.map((blogResponse) => blogResponse.data);
+
         const dataObject = {
           username: response.data.username,
           bio: response.data.bio,
           backgroundColor: response.data.backgroundColor,
-          blogs: response.data.blogs,
+          blogs: blogs,
         };
-        console.log("Data object:", dataObject);
         setData(dataObject);
       } catch (error: AxiosError | any) {
         if (error.response) {
@@ -64,7 +77,6 @@ const Home = () => {
       }
     };
     getData();
-    console.log(environmentURL());
   }, [router, userID, token]);
 
   return (

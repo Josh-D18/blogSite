@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import React, { useState } from "react";
 import "../../src/app/globals.css";
 import { useRouter } from "next/navigation";
+import environmentURL from "../../src/app/utils/url";
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -22,7 +23,7 @@ const LoginPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5050/login", {
+      const response = await axios.post(`${environmentURL}/api/login`, {
         username,
         password,
       });
@@ -39,7 +40,7 @@ const LoginPage: React.FC = () => {
         if (error.response.status === 400) {
           alert("Username or Password is incorrect");
         } else if (error.response.status === 404) {
-          alert("The user entered does not exist.");
+          alert("An error occurred. Please try again later.");
         }
       } else if (error.request) {
         alert("Request error. Please try again later.");

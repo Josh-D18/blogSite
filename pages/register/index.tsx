@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import "../../src/app/globals.css";
+import environmentURL from "../../src/app/utils/url";
 
 const RegisterPage: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -28,20 +29,24 @@ const RegisterPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5050/register", {
+      const response = await axios.post(`${environmentURL}/api/register`, {
         username,
         password,
         bio,
       });
-      const session = response.data;
 
+      const session = response.data;
       sessionStorage.setItem("token", session);
+      setUsername("");
+      setPassword("");
+      setBio("");
+      linkToPage("/login");
     } catch (error: AxiosError | any) {
       if (error.response) {
         if (error.response.status === 400) {
           alert(error.response.data.ERROR);
         } else if (error.response.status === 404) {
-          alert("User not found.");
+          alert("An error occurred. Please try again later.");
         }
       } else if (error.request) {
         alert("Request error. Please try again later.");
@@ -49,10 +54,6 @@ const RegisterPage: React.FC = () => {
         alert("An error occurred. Please try again later.");
       }
     }
-    setUsername("");
-    setPassword("");
-    setBio("");
-    linkToPage("/login");
   };
 
   return (
@@ -94,8 +95,9 @@ const RegisterPage: React.FC = () => {
             value={bio}
             onChange={handleBioChange}
             required
-            className="w-full px-4 py-2 border-2 border-gray-300 rounded-md md:max-w-md"
+            className="w-full px-4 py-2 border-2 border-gray-300 rounded-md resize-none md:max-w-md"
             maxLength={300}
+            rows={15}
           />
         </div>
         <button
