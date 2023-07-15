@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import placeholderImage from "../../../assets/images/jk-placeholder-image.jpg";
+// Will be used in V2
 const ProfileImage: React.FC = () => {
   return (
     <div className="flex items-center justify-center">
