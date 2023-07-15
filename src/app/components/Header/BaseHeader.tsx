@@ -36,7 +36,7 @@ const BaseHeader: React.FC<BaseHeaderProps> = (props) => {
     >
       <div>
         <h1 className="mt-3 font-bold text-white">The Creative Process</h1>
-        <p className="font-bold text-white">@{username} Page</p>
+        <p className="font-bold text-white">@{username}</p>
         <button
           className="px-4 py-2 my-2 text-white uppercase bg-blue-500 border-2 border-gray-300 rounded-md"
           onClick={() => handleLogout()}
