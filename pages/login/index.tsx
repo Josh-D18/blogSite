@@ -37,16 +37,13 @@ const LoginPage: React.FC = () => {
     } catch (error: AxiosError | any) {
       if (error.response) {
         if (error.response.status === 400) {
-          alert(error.response.data.ERROR);
-          console.log(error.response.data.ERRO);
+          alert("Username or Password is incorrect");
         } else if (error.response.status === 404) {
           alert("The user entered does not exist.");
         }
       } else if (error.request) {
-        console.log("Request error:", error.request);
         alert("Request error. Please try again later.");
       } else {
-        console.log("Error:", error.message);
         alert("An error occurred. Please try again later.");
       }
     }

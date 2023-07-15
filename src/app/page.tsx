@@ -53,6 +53,8 @@ const Home = () => {
             alert(error.response.data.ERROR);
           } else if (error.response.status === 401) {
             router.push("/login");
+          } else if (error.response.status === 403) {
+            router.push("/login");
           }
         } else if (error.request) {
           alert("Request error. Please try again later.");
